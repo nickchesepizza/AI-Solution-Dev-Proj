@@ -2,9 +2,6 @@
 data/*.db
 data/*.sqlite
 
-# Ignore saved machine learning models if they are large
-saved_model/
-
 # Ignore Python/Jupyter cache files
 __pycache__/
 .ipynb_checkpoints/
