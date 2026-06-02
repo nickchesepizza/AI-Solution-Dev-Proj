@@ -1,0 +1,18 @@
+data:
+  db_path: "data/gas_monitoring.db"
+  table_name: "gas_monitoring"
+
+preprocessing:
+  temp_lower_bound: 12.59
+  temp_upper_bound: 29.52
+  humidity_lower_bound: 20.0
+  humidity_upper_bound: 80.0
+
+model:
+  algorithm: "GradientBoosting"
+  test_size: 0.2
+  random_state: 42
+  hyperparameters:
+    n_estimators: 500
+    learning_rate: 0.0001
+    max_depth: 3
