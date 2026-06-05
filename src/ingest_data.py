@@ -1,15 +1,19 @@
+
+"""Data Ingestion Module :This script provides utility functions to load project configurations from a YAML file 
+and ingest data from a SQLite database into a Pandas DataFrame."""
+
 import sqlite3
 import pandas as pd
 import yaml
 
 def load_config(config_path="config.yaml"):
-    """Loads the YAML configuration file."""
+    """This one loads the YAML configuration file."""
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
     return config
 
 def ingest_from_db(db_path, table_name):
-    """Connects to the SQLite DB and extracts the data into a Pandas DataFrame."""
+    """This one connects to the SQLite DB and extracts the data into a Pandas DataFrame."""
     print(f"Connecting to database at: {db_path}...")
     
     # Establish connection using sqlite3
@@ -19,7 +23,7 @@ def ingest_from_db(db_path, table_name):
     query = f"SELECT * FROM {table_name}"
     df = pd.read_sql_query(query, conn)
     
-    # Close the connection
+    # Close the connection to safely release database resources
     conn.close()
     
     print(f"Successfully loaded {len(df)} rows and {len(df.columns)} columns.")
