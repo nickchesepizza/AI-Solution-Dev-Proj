@@ -1,8 +1,16 @@
+"""
+Model Evaluation Module
+
+This script handles loading the configuration, regenerating the test data split, 
+loading a trained machine learning model, and outputting performance metrics 
+and feature importances.
+"""
+
 import pandas as pd
 import yaml
-import pickle
-import os
-import sys
+import pickle #use it to load previously trained machine learning model from the saved ".pkl" file so we can generate predictions
+import os  #use it to get the absolute path of the current script, and also to safely check if the saved model file actually exists before we try to open it.
+import sys #use it alongside `os` to add the current script's directory to the system path (`sys.path.append`). This trick allows my script to easily import functions from other custom local files
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -11,14 +19,21 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from ingest_data import ingest_from_db
 from clean_data import preprocess_data
 
+# Function to load configuration settings from a given YAML file
 def load_config(config_path="config.yaml"):
     """Loads the YAML configuration file."""
     with open(config_path, "r") as file:
         return yaml.safe_load(file)
 
 def evaluate_model():
-    """Loads the trained model and evaluates it on test data."""
-    print("=== STARTING EVALUATION PIPELINE ===")
+    """Loads the trained model and evaluates it on test data.
+
+    This function coordinates the ingestion and preprocessing of data, 
+    splits it to isolate the test set, loads the specified machine learning 
+    model from disk, and prints evaluation metrics (classification report, 
+    confusion matrix) alongside key feature importances."""
+    print("STARTING EVALUATION PIPELINE")
+
     config = load_config()
 
     # 1. Recreate the exact same test data
@@ -43,28 +58,28 @@ def evaluate_model():
         print(f"Error: Could not find {model_path}. Did you train this model yet?")
         return
 
-    print(f"\n[Step 1] Loading {algo} model from {model_path}...")
+    print(f"\n Loading {algo} model from {model_path}...")
     with open(model_path, "rb") as f:
         model = pickle.load(f)
 
     # 3. Make Predictions
-    print(f"[Step 2] Testing the model on {len(X_test)} hidden rows...")
+    print(f"Testing the model on {len(X_test)} hidden rows...")
     y_pred = model.predict(X_test)
 
     # 4. Print Metrics for your Report
     print("\n" + "="*50)
-    print(f"🚀 {algo.upper()} EVALUATION RESULTS")
+    print(f"{algo.upper()} EVALUATION RESULTS")
     print("="*50)
     
-    print("\n📊 CLASSIFICATION REPORT:")
+    print("\nCLASSIFICATION REPORT:")
     # Target names match your 0=Low, 1=Moderate, 2=High mapping
     print(classification_report(y_test, y_pred, target_names=['Low (0)', 'Moderate (1)', 'High (2)']))
     
-    print("📉 CONFUSION MATRIX:")
+    print("CONFUSION MATRIX:")
     print(confusion_matrix(y_test, y_pred))
 
-    # 5. Extract Feature Importance (Crucial for objective 2!)
-    print("\n🔑 KEY FEATURE IMPORTANCE:")
+    # 5. Extract Feature Importance 
+    print("\n KEY FEATURE IMPORTANCE:")
     
     if hasattr(model, 'feature_importances_'):
         # This handles Random Forest and Decision Tree
