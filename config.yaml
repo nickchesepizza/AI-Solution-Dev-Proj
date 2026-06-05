@@ -9,10 +9,6 @@ preprocessing:
   humidity_upper_bound: 80.0
 
 model:
-  algorithm: "GradientBoosting"
+  algorithm: "LogisticRegression"
   test_size: 0.2
   random_state: 42
-  hyperparameters:
-    n_estimators: 500
-    learning_rate: 0.0001
-    max_depth: 3
