@@ -1,8 +1,8 @@
 ## Group Name: Team 1
 ## Members: Danish, Zaw Moon, Daniel
-Zaw Moon --> injest_data.py and evaluate.py
-Danish --> clean_data.py
-Daniel --> train_model.py
+Zaw Moon → injest_data.py and evaluate.py\
+Danish → clean_data.py\
+Daniel → train_model.py
 
 ## Pipeline Instruction
 
@@ -46,7 +46,9 @@ docker compose down
 ## Choice of Models
 Model used was DecisionTree, RandomForest, GradientBoosting.
 DecisionTree → DecisionTree is fast to train and can copy human logic like if CO2 is high and humidity is rising, trigger alarm
-RandomForest → RandomForest can train hundreds of individual trees on random subset and have a vote on the final prediction. like each tree see different subset and is able to decide which is best. 
+
+RandomForest → RandomForest can train hundreds of individual trees on random subset and have a vote on the final prediction. like each tree see different subset and is able to decide which is best.
+
 GradientBoosting → GradientBoosting instead of hundreds together at once, it build sequentially. Like tree 1 see this but tree 2 see that and correct it and more.
 
 ### Tuning Methods
