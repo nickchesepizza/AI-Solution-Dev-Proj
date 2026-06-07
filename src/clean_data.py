@@ -132,17 +132,11 @@ def clean_and_encode(df, config):
 
 def scale_features(df):
     """Standardize the environmental sensor features."""
-    min_max_cols = ['CO2_InfraredSensor']
     std_cols = [
         'CO2_ElectroChemicalSensor', 'MetalOxideSensor_Unit1', 
         'MetalOxideSensor_Unit2', 'MetalOxideSensor_Unit3', 
-        'MetalOxideSensor_Unit4', 'CO_GasSensor'
+        'MetalOxideSensor_Unit4', 'CO_GasSensor', 'CO2_InfraredSensor'
     ]
-    
-    min_max_scaler = MinMaxScaler()
-    for col in min_max_cols:
-        if col in df.columns:
-            df[col] = min_max_scaler.fit_transform(df[[col]])
             
     std_scaler = StandardScaler()
     for col in std_cols:
