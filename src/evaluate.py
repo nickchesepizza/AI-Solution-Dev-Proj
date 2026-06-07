@@ -29,9 +29,9 @@ def evaluate_model():
     """Loads the trained model and evaluates it on test data.
 
     This function coordinates the ingestion and preprocessing of data, 
-    splits it to isolate the test set, loads the specified machine learning 
-    model from disk, and prints evaluation metrics (classification report, 
-    confusion matrix) alongside key feature importances."""
+    splits it to do the test set, loads the machine learning 
+    model from saved ones, and prints evaluation metrics ( like classification report and 
+    confusion matrix) together with key feature importances."""
     print("STARTING EVALUATION PIPELINE")
 
     config = load_config()
@@ -66,13 +66,13 @@ def evaluate_model():
     print(f"Testing the model on {len(X_test)} hidden rows...")
     y_pred = model.predict(X_test)
 
-    # 4. Print Metrics for your Report
+    # 4. Print Metrics for the Report
     print("\n" + "="*50)
     print(f"{algo.upper()} EVALUATION RESULTS")
     print("="*50)
     
     print("\nCLASSIFICATION REPORT:")
-    # Target names match your 0=Low, 1=Moderate, 2=High mapping
+    # Target names to match 0=Low, 1=Moderate, 2=High mapping
     print(classification_report(y_test, y_pred, target_names=['Low (0)', 'Moderate (1)', 'High (2)']))
     
     print("CONFUSION MATRIX:")
