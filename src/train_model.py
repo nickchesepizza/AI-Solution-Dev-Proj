@@ -77,8 +77,8 @@ def execute_training_pipeline():
             'n_estimators': [100, 200],
             'max_depth': [None, 10, 20]
         }
-        # Using f1_macro so it calculates f1 score low, moderate, high independently
-        model = GridSearchCV(base_model, param_grid, cv=3, scoring='f1_macro', n_jobs=-1)
+        # Using recall_macro to prevent false nagatives
+        model = GridSearchCV(base_model, param_grid, cv=3, scoring='recall_macro', n_jobs=-1)
 
     elif selected_model == "GradientBoosting":
         base_model = GradientBoostingClassifier(random_state=random_state)

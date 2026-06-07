@@ -52,8 +52,10 @@ RandomForest → RandomForest can train hundreds of individual trees on random s
 GradientBoosting → GradientBoosting instead of hundreds together at once, it build sequentially. Like tree 1 see this but tree 2 see that and correct it and more.
 
 ### Tuning Methods
-GridSearchCV → using GridSearchCV to test combination of hyperparameters like max_depth and n_estimators so intead of guessing, it can find the optimal configuration within the grid
+GridSearchCV → using GridSearchCV to test combination of hyperparameters like max_depth and n_estimators so instead of guessing, it can find the optimal configuration within the grid.
 
-K-Fold Cross Validation → ensuring the model dont memorize the training data, applying 3 fold cross validation during training, by rotating the train and validation multiple times to ensure the final model is generalize on new unseen data
+K-Fold Cross Validation → ensuring the model dont memorize the training data, applying 3 fold cross validation during training, by rotating the train and validation multiple times to ensure the final model is generalize on new unseen data.
 
 ## Choice of Metrics
+Since our project focus mainly on healthcare monitoring system, the suitable choice of metrice will be recall since it minimizes false negatives to ensure no critical events go undetected.
+

@@ -8,9 +8,9 @@ and feature importances.
 
 import pandas as pd
 import yaml
-import pickle #use it to load previously trained machine learning model from the saved ".pkl" file so we can generate predictions
-import os  #use it to get the absolute path of the current script, and also to safely check if the saved model file actually exists before we try to open it.
-import sys #use it alongside `os` to add the current script's directory to the system path (`sys.path.append`). This trick allows my script to easily import functions from other custom local files
+import pickle #use it to load previously trained machine learning model from the saved ".pkl" file so we can do predictions
+import os  #use it to get the path of the current script
+import sys #use it together with os
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 

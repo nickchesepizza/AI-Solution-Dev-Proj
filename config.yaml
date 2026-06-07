@@ -9,6 +9,6 @@ preprocessing:
   humidity_upper_bound: 80.0
 
 model:
-  algorithm: "RandomForest"
+  algorithm: "DecisionTree"
   test_size: 0.2
   random_state: 42
