@@ -34,6 +34,7 @@ docker compose down
 - **Impossible Humidity:** We found humidity readings that were impossible (like below 0% or above 100%).
 - **Missing Data:** Several sensors randomly stopped recording, leaving blank spaces in our data.
 - **Good Baselines:** The "Time of Day" and "Session ID" columns were perfectly complete with no missing data. This means we can rely on them to figure out what the missing sensor data should be.
+  
 ## Features that are engineered (clean data features)
 - **Words to Numbers:** We changed the "Time of Day" words into simple numbers (Morning = 1, Afternoon = 2, Evening = 3, Night = 4) because machine learning models work best with numbers.
 - **Fixing Temperatures:** We corrected the super high temperature readings by using a math formula to change them from Kelvin back to normal Celsius.
@@ -42,21 +43,19 @@ docker compose down
 - **Scaling Data:** Some sensors spit out very big numbers and others spit out very small numbers. We scaled the "Metal Oxide Sensor" columns so their numbers are all on the same playing field, which helps the model learn faster without getting confused.
 - **Rounding Numbers:** We rounded the CO gas sensor numbers to the nearest whole number to keep the readings simple and clean.
 - **Splitting Air Conditioning Modes:** The air conditioning (HVAC) column had different words in it (like "Off", "Eco", "Heating"). We split these into separate Yes/No columns (e.g., a column just for "Is Heating On? Yes or No") to make it easier for the AI to read.
+
 ## Choice of Models
 Model used was DecisionTree, RandomForest, GradientBoosting.
 - **DecisionTree** → DecisionTree is fast to train and can copy human logic like if CO2 is high and humidity is rising, trigger alarm
 - **RandomForest** → RandomForest can train hundreds of individual trees on random subset and have a vote on the final prediction. like each tree see different subset and is able to decide which is best.
 - **GradientBoosting** → GradientBoosting instead of hundreds together at once, it build sequentially. Like tree 1 see this but tree 2 see that and correct it and more.
+- 
 ### Tuning Methods
-<<<<<<< HEAD
-GridSearchCV → using GridSearchCV to test combination of hyperparameters like max_depth and n_estimators so instead of guessing, it can find the optimal configuration within the grid.
+- **GridSearchCV** → using GridSearchCV to test combination of hyperparameters like max_depth and n_estimators so instead of guessing, it can find the optimal configuration within the grid.
+- **K-Fold Cross Validation** → ensuring the model don't memorize the training data, applying 3 fold cross validation during training, by rotating the train and validation multiple times to ensure the final model is generalize on new unseen data
 
-K-Fold Cross Validation → ensuring the model dont memorize the training data, applying 3 fold cross validation during training, by rotating the train and validation multiple times to ensure the final model is generalize on new unseen data.
-
-=======
-- **GridSearchCV** → using GridSearchCV to test combination of hyperparameters like max_depth and n_estimators so intead of guessing, it can find the optimal configuration within the grid
-- **K-Fold Cross Validation** → ensuring the model dont memorize the training data, applying 3 fold cross validation during training, by rotating the train and validation multiple times to ensure the final model is generalize on new unseen data
->>>>>>> 37ea6be14c19ec02104f8e3206036f6aa32c4dd1
 ## Choice of Metrics
-Since our project focus mainly on healthcare monitoring system, the suitable choice of metrice will be recall since it minimizes false negatives to ensure no critical events go undetected.
+- **Recall** → Since our project focus mainly on healthcare monitoring system, the suitable choice of metrice will be recall since it minimizes false negatives to ensure no critical events go undetected.
+- **Confusion Matrix** → to see how many critical events does the model predict wrongly in the test dataset.
+- **Key feature importance** → to know which feature are the main contributor to detect the activity.
 
