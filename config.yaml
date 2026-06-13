@@ -5,8 +5,8 @@ data:
 preprocessing:
   temp_lower_bound: 12.59
   temp_upper_bound: 29.52
-  humidity_lower_bound: 20.0
-  humidity_upper_bound: 80.0
+  humidity_lower_bound: 10.0
+  humidity_upper_bound: 90.0
 
 model:
   algorithm: "DecisionTree"

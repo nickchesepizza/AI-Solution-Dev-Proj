@@ -49,7 +49,7 @@ Model used was DecisionTree, RandomForest, GradientBoosting.
 - **DecisionTree** → DecisionTree is fast to train and can copy human logic like if CO2 is high and humidity is rising, trigger alarm
 - **RandomForest** → RandomForest can train hundreds of individual trees on random subset and have a vote on the final prediction. like each tree see different subset and is able to decide which is best.
 - **GradientBoosting** → GradientBoosting instead of hundreds together at once, it build sequentially. Like tree 1 see this but tree 2 see that and correct it and more.
-- 
+
 ### Tuning Methods
 - **GridSearchCV** → using GridSearchCV to test combination of hyperparameters like max_depth and n_estimators so instead of guessing, it can find the optimal configuration within the grid.
 - **K-Fold Cross Validation** → ensuring the model don't memorize the training data, applying 3 fold cross validation during training, by rotating the train and validation multiple times to ensure the final model is generalize on new unseen data

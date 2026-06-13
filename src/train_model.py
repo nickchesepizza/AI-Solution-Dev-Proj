@@ -10,7 +10,6 @@ from sklearn.tree import DecisionTreeClassifier
 from ingest_data import ingest_from_db
 from clean_data import preprocess_data
 
-
 # Import SMOTE for handling class imbalance
 try:
     from imblearn.over_sampling import SMOTE
@@ -112,6 +111,14 @@ def execute_training_pipeline():
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
     with open(model_path, "wb") as f:
         pickle.dump(final_model, f)
+
+    # Save training and testing Data for evaluation.py
+    print("\nSaving train and test data to CSV for evaluation/debugging...")
+    os.makedirs("data", exist_ok=True) 
+    X_train.to_csv("data/X_train.csv", index=False)
+    y_train.to_csv("data/y_train.csv", index=False)
+    X_test.to_csv("data/X_test.csv", index=False)
+    y_test.to_csv("data/y_test.csv", index=False)
 
     print(f"\nModel saved to {model_path}")
     return final_model, X_train, X_test, y_train, y_test
